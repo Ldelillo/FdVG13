@@ -462,6 +462,7 @@ GameObject:
   - component: {fileID: 1187434912}
   - component: {fileID: 1187434913}
   - component: {fileID: 1187434914}
+  - component: {fileID: 1187434915}
   m_Layer: 0
   m_Name: Jugador
   m_TagString: Player
@@ -648,6 +649,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speedIncrement: 1
+--- !u!114 &1187434915
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1187434907}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba41fc15def64274aaff9bb131b4e37b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackRange: 0.5
+  attackDamage: 10
+  enemyLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  attackPoint: {fileID: 1187434909}
+  animator: {fileID: 0}
+  attackCooldown: 0.5
 --- !u!1001 &1544424538
 PrefabInstance:
   m_ObjectHideFlags: 0
