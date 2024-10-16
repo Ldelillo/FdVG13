@@ -78,6 +78,9 @@ public class MovimientoEnemigo : MonoBehaviour
                 }
                 return; // Salir de Update para no seguir patrullando
             }
+            else{
+                jugadorCerca = false;
+            }
         }
 
         // Si el jugador no est� cerca, patrullar entre dos puntos
@@ -104,8 +107,8 @@ public class MovimientoEnemigo : MonoBehaviour
         }
 
         // Verificar si el enemigo ha llegado al destino
-        if (Vector2.Distance(transform.position, destinoActual) < 0.1f || transform.position.x - (posicionInicial.x - xIzquierdaMax) <=0 ||
-         transform.position.x - (posicionInicial.x + xDerechaMax)  >=0) //Estas dos condiciones extras son necesarias para evitar bugs despues de pasar por patrullaje
+        if (Vector2.Distance(transform.position, destinoActual) < 0.1f || transform.position.x - (posicionInicial.x - xIzquierdaMax) <=0f ||
+         transform.position.x - (posicionInicial.x + xDerechaMax)  >=0f) //Estas dos condiciones extras son necesarias para evitar bugs despues de pasar por patrullaje
         {
             // Cambiar el destino al otro punto (xIzquierdaMax o xDerechaMax)
             if (destinoActual.x == posicionInicial.x - xIzquierdaMax)
@@ -130,6 +133,7 @@ public class MovimientoEnemigo : MonoBehaviour
             // Mover al jugador a su posici�n inicial
             collision.gameObject.transform.position = posicionInicialJugador;
             movimiento.SetBool("Persigue",false);
+            jugadorCerca = false;
             Patrullar(); //Si la serpiente impacta con el jugador tenemos que volver al estado inicial
         }
     }

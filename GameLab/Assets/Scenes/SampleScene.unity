@@ -813,10 +813,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6d539e85ebceef4ca6a489b349a6c03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xIzquierdaMax: 5
-  xDerechaMax: 5
+  xIzquierdaMax: 10
+  xDerechaMax: 10
   velocidad: 2
-  distanciaDeteccion: 3
+  distanciaDeteccion: 5
   distanciaParada: 1
   jugador: {fileID: 1187434909}
 --- !u!50 &1881941918
