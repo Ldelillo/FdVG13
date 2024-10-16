@@ -1,31 +1,41 @@
+using System;
+using System.Data;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class MovimientoEnemigo : MonoBehaviour
 {
-    // Posiciones en el eje X entre las que patrullará el enemigo
-    public float xInicial = 30f;  // Primera posición X
-    public float xFinal = 60f;    // Segunda posición X
+    // Posiciones en el eje X entre las que patrullarï¿½ el enemigo
+    public float xIzquierdaMax = 10f;  // Primera posiciï¿½n X
+    public float xDerechaMax = 10f;    // Segunda posiciï¿½n X
     public float velocidad = 2f;  // Velocidad de movimiento
 
-    // Distancia mínima para detenerse frente al jugador
-    public float distanciaDeteccion = 5f; // Distancia a la que detecta al jugador
-    public float distanciaParada = 1f;    // Distancia mínima para detenerse frente al jugador
+    // Distancia mï¿½nima para detenerse frente al jugador
+    public float distanciaDeteccion = 3f; // Distancia a la que detecta al jugador
+    public float distanciaParada = 1f;    // Distancia mï¿½nima para detenerse frente al jugador
 
     // Variables internas
     private Vector3 destinoActual;        // Almacena el destino actual del enemigo
-    private bool jugadorCerca = false;    // Verifica si el jugador está lo suficientemente cerca
+    private bool jugadorCerca = false;    // Verifica si el jugador estï¿½ lo suficientemente cerca
     private bool seDetuvoFrenteJugador = false; // Verifica si el enemigo se ha detenido frente al jugador
 
-    // Referencia al jugador y a su posición inicial
+    // Referencia al jugador y a su posiciï¿½n inicial
     public Transform jugador;
     private Vector3 posicionInicialJugador;
+    private Vector2 posicionInicial;
+
+    private Animator movimiento;
+
 
     void Start()
     {
-        // Establecer el primer destino en la posición inicial
-        destinoActual = new Vector3(xInicial, transform.position.y, transform.position.z);
+        //Recogemos y guardamos la posicion inicial del jugador
+        posicionInicial = transform.position;
+        // Establecer el primer destino en la posiciï¿½n inicial
+        destinoActual = new Vector3(posicionInicial.x + xIzquierdaMax, transform.position.y, transform.position.z);
+        movimiento = GetComponent<Animator>();
 
-        // Guardar la posición inicial del jugador
+        // Guardar la posiciï¿½n inicial del jugador
         if (jugador != null)
         {
             posicionInicialJugador = jugador.position;
@@ -41,10 +51,11 @@ public class MovimientoEnemigo : MonoBehaviour
 
             if (distanciaAlJugador <= distanciaDeteccion)
             {
-                // Si el jugador está lo suficientemente cerca, detener la patrulla
+                // Si el jugador estï¿½ lo suficientemente cerca, detener la patrulla
+                movimiento.SetBool("Persigue",true);
                 jugadorCerca = true;
 
-                // Mover hacia el jugador hasta que esté a la distancia de parada
+                // Mover hacia el jugador hasta que estï¿½ a la distancia de parada
                 if (distanciaAlJugador > distanciaParada)
                 {
                     // Mover el enemigo hacia el jugador
@@ -62,41 +73,27 @@ public class MovimientoEnemigo : MonoBehaviour
                 }
                 else
                 {
-                    // El enemigo se detiene cuando está suficientemente cerca del jugador
+                    // El enemigo se detiene cuando estï¿½ suficientemente cerca del jugador
                     seDetuvoFrenteJugador = true;
                 }
                 return; // Salir de Update para no seguir patrullando
             }
         }
 
-        // Si el jugador no está cerca, patrullar entre dos puntos
+        // Si el jugador no estï¿½ cerca, patrullar entre dos puntos
         if (!jugadorCerca)
         {
+            movimiento.SetBool("Persigue",false);
             Patrullar();
         }
     }
 
-    // Método para patrullar entre dos puntos
+    // Mï¿½todo para patrullar entre dos puntos
     void Patrullar()
     {
         // Mover el enemigo hacia el destino actual
         transform.position = Vector2.MoveTowards(transform.position, destinoActual, velocidad * Time.deltaTime);
-
-        // Verificar si el enemigo ha llegado al destino
-        if (Vector2.Distance(transform.position, destinoActual) < 0.1f)
-        {
-            // Cambiar el destino al otro punto (xInicial o xFinal)
-            if (destinoActual.x == xInicial)
-            {
-                destinoActual = new Vector3(xFinal, transform.position.y, transform.position.z);
-            }
-            else
-            {
-                destinoActual = new Vector3(xInicial, transform.position.y, transform.position.z);
-            }
-        }
-
-        // Girar el enemigo en función de la dirección en la que se mueve
+        // Girar el enemigo en funciï¿½n de la direcciï¿½n en la que se mueve
         if (destinoActual.x > transform.position.x)
         {
             transform.localScale = new Vector3(1, 1, 1);  // Mirando a la derecha
@@ -105,6 +102,23 @@ public class MovimientoEnemigo : MonoBehaviour
         {
             transform.localScale = new Vector3(-1, 1, 1);  // Mirando a la izquierda
         }
+
+        // Verificar si el enemigo ha llegado al destino
+        if (Vector2.Distance(transform.position, destinoActual) < 0.1f || transform.position.x - (posicionInicial.x - xIzquierdaMax) <=0 ||
+         transform.position.x - (posicionInicial.x + xDerechaMax)  >=0) //Estas dos condiciones extras son necesarias para evitar bugs despues de pasar por patrullaje
+        {
+            // Cambiar el destino al otro punto (xIzquierdaMax o xDerechaMax)
+            if (destinoActual.x == posicionInicial.x - xIzquierdaMax)
+            {
+                destinoActual = new Vector3(posicionInicial.x + xDerechaMax, transform.position.y, transform.position.z);
+            }
+            else
+            {
+                destinoActual = new Vector3(posicionInicial.x - xIzquierdaMax, transform.position.y, transform.position.z);
+            }
+        }
+
+
     }
 
     // Detectar colisiones con el jugador
@@ -113,8 +127,10 @@ public class MovimientoEnemigo : MonoBehaviour
         // Verificar si el objeto con el que colisiona tiene la etiqueta "Player"
         if (collision.gameObject.CompareTag("Player"))
         {
-            // Mover al jugador a su posición inicial
+            // Mover al jugador a su posiciï¿½n inicial
             collision.gameObject.transform.position = posicionInicialJugador;
+            movimiento.SetBool("Persigue",false);
+            Patrullar(); //Si la serpiente impacta con el jugador tenemos que volver al estado inicial
         }
     }
 }
