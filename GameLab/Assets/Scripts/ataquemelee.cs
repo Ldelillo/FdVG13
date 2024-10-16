@@ -12,10 +12,12 @@ public class PlayerAttack : MonoBehaviour
     private float nextAttackTime = 0f;    // Tiempo para el siguiente ataque
 
     public KeyCode attackKey = KeyCode.Z;
+    public AudioSource ataque;
     void Update()
     {
         if (Time.time >= nextAttackTime && Input.GetKeyDown(attackKey))
         {
+            ataque.Play();
             PerformAttack();
             nextAttackTime = Time.time + attackCooldown;
         }

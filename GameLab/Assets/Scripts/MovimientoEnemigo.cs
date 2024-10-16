@@ -107,8 +107,7 @@ public class MovimientoEnemigo : MonoBehaviour
         }
 
         // Verificar si el enemigo ha llegado al destino
-        if (Vector2.Distance(transform.position, destinoActual) < 0.1f || transform.position.x - (posicionInicial.x - xIzquierdaMax) <=0f ||
-         transform.position.x - (posicionInicial.x + xDerechaMax)  >=0f) //Estas dos condiciones extras son necesarias para evitar bugs despues de pasar por patrullaje
+        if (Vector2.Distance(transform.position, destinoActual) < 0.1f ) //Estas dos condiciones extras son necesarias para evitar bugs despues de pasar por patrullaje
         {
             // Cambiar el destino al otro punto (xIzquierdaMax o xDerechaMax)
             if (destinoActual.x == posicionInicial.x - xIzquierdaMax)
