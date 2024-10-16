@@ -530,10 +530,11 @@ Transform:
   m_GameObject: {fileID: 1187434907}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.53, y: -3.7, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -5.9023, y: -3.7, z: 0}
+  m_LocalScale: {x: 1.0353, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1657955234}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &1187434910
@@ -645,17 +646,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1187434907}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ba41fc15def64274aaff9bb131b4e37b, type: 3}
+  m_Script: {fileID: 11500000, guid: 5db681b83d719954bad58a3cef144799, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   attackRange: 0.5
   attackDamage: 10
-  enemyLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  attackPoint: {fileID: 1187434909}
-  animator: {fileID: 0}
+  attackPoint: {fileID: 1657955234}
   attackCooldown: 0.5
+  attackKey: 122
 --- !u!1001 &1544424538
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -713,6 +711,37 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8df634625289afd468b80e2059b4978a, type: 3}
+--- !u!1 &1657955233
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1657955234}
+  m_Layer: 0
+  m_Name: ControladorAtaque
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1657955234
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1657955233}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1187434909}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1881941914
 GameObject:
   m_ObjectHideFlags: 0
@@ -727,9 +756,10 @@ GameObject:
   - component: {fileID: 1881941917}
   - component: {fileID: 1881941919}
   - component: {fileID: 1881941920}
+  - component: {fileID: 1881941921}
   m_Layer: 0
   m_Name: CobraEnemigo
-  m_TagString: Untagged
+  m_TagString: Enemigo
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -813,10 +843,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6d539e85ebceef4ca6a489b349a6c03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xIzquierdaMax: 10
-  xDerechaMax: 10
+  xIzquierdaMax: 5
+  xDerechaMax: 5
   velocidad: 2
-  distanciaDeteccion: 5
+  distanciaDeteccion: 3
   distanciaParada: 1
   jugador: {fileID: 1187434909}
 --- !u!50 &1881941918
@@ -912,6 +942,19 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1881941921
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1881941914}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ead55fe0b2198854b881a708c183bb1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 100
 --- !u!1001 &2944089581163214629
 PrefabInstance:
   m_ObjectHideFlags: 0
