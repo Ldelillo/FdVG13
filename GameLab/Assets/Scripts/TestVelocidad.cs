@@ -9,13 +9,13 @@ public class TestVelocidad : MonoBehaviour
 
     void Start()
     {
-        // Buscar automáticamente el script MovimientoJugador en el objeto del jugador
+        // Buscar automï¿½ticamente el script MovimientoJugador en el objeto del jugador
         playerMovementScript = FindObjectOfType<MovimientoJugador>();
     }
 
     void Update()
     {
-        // Si el script de MovimientoJugador no está asignado, salir
+        // Si el script de MovimientoJugador no estï¿½ asignado, salir
         if (playerMovementScript == null) return;
 
         // Ajustar la velocidad con la tecla '+' (RightBracket)

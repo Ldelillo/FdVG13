@@ -7,8 +7,8 @@ public class MovimientoJugador : MonoBehaviour
     public float speed = 5f;      // Velocidad de movimiento del cubo
     public float jumpForce = 5f;  // Fuerza del salto
     private int jumpCount = 0;    // Contador de saltos realizados
-    public int maxJumps = 2;      // Número máximo de saltos permitidos (2 para doble salto)
-    private bool isGrounded;      // Para verificar si está en el suelo
+    public int maxJumps = 2;      // Nï¿½mero mï¿½ximo de saltos permitidos (2 para doble salto)
+    private bool isGrounded;      // Para verificar si estï¿½ en el suelo
     private Rigidbody2D rb;       // Referencia al Rigidbody2D del cubo
 
     void Start()
@@ -30,7 +30,7 @@ public class MovimientoJugador : MonoBehaviour
         // Detectar si se presiona la barra espaciadora
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            // Si el jugador está en el suelo o tiene saltos restantes, puede saltar
+            // Si el jugador estï¿½ en el suelo o tiene saltos restantes, puede saltar
             if (isGrounded || jumpCount < maxJumps)
             {
                 Jump();
@@ -38,7 +38,7 @@ public class MovimientoJugador : MonoBehaviour
         }
     }
 
-    // Método para aplicar la fuerza del salto
+    // Mï¿½todo para aplicar la fuerza del salto
     void Jump()
     {
         // Resetear la velocidad en el eje Y para un salto consistente
@@ -50,17 +50,17 @@ public class MovimientoJugador : MonoBehaviour
         // Aumentar el contador de saltos
         jumpCount++;
 
-        // Indicar que ya no está en el suelo después del primer salto
+        // Indicar que ya no estï¿½ en el suelo despuï¿½s del primer salto
         isGrounded = false;
     }
 
-    // Detectar cuándo está tocando el suelo
+    // Detectar cuï¿½ndo estï¿½ tocando el suelo
     void OnCollisionEnter2D(Collision2D collision)
     {
         // Si el cubo colisiona con el suelo, reiniciar el contador de saltos
         if (collision.gameObject.CompareTag("Suelo"))
         {
-            isGrounded = true;  // Está en el suelo
+            isGrounded = true;  // Estï¿½ en el suelo
             jumpCount = 0;      // Resetear el contador de saltos
         }
     }

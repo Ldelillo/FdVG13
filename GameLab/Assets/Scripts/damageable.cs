@@ -3,9 +3,12 @@ using UnityEngine;
 public class Damageable : MonoBehaviour
 {
     public int health = 100;
+    public float experiencia;
     public AudioSource golpeado;
+    public Player jugador;
+
     public void TakeDamage(int damage)
-    {   
+    {
         golpeado.Play();
         health -= damage;
 
@@ -20,5 +23,6 @@ public class Damageable : MonoBehaviour
     {
         // Reproducir animación de muerte, sonido o algún efecto visual
         Destroy(gameObject); // Destruir el objeto del enemigo
+        jugador.expUP(experiencia);
     }
 }

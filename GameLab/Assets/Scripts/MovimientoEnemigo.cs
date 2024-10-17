@@ -21,10 +21,11 @@ public class MovimientoEnemigo : MonoBehaviour
 
     // Referencia al jugador y a su posici�n inicial
     public Transform jugador;
-    private Vector3 posicionInicialJugador;
+    //private Vector3 posicionInicialJugador;
     private Vector2 posicionInicial;
 
     private Animator movimiento;
+    public int daño;
 
 
     void Start()
@@ -38,7 +39,7 @@ public class MovimientoEnemigo : MonoBehaviour
         // Guardar la posici�n inicial del jugador
         if (jugador != null)
         {
-            posicionInicialJugador = jugador.position;
+            //posicionInicialJugador = jugador.position;
         }
     }
 
@@ -52,7 +53,7 @@ public class MovimientoEnemigo : MonoBehaviour
             if (distanciaAlJugador <= distanciaDeteccion)
             {
                 // Si el jugador est� lo suficientemente cerca, detener la patrulla
-                movimiento.SetBool("Persigue",true);
+                movimiento.SetBool("Persigue", true);
                 jugadorCerca = true;
 
                 // Mover hacia el jugador hasta que est� a la distancia de parada
@@ -78,7 +79,8 @@ public class MovimientoEnemigo : MonoBehaviour
                 }
                 return; // Salir de Update para no seguir patrullando
             }
-            else{
+            else
+            {
                 jugadorCerca = false;
             }
         }
@@ -86,7 +88,7 @@ public class MovimientoEnemigo : MonoBehaviour
         // Si el jugador no est� cerca, patrullar entre dos puntos
         if (!jugadorCerca)
         {
-            movimiento.SetBool("Persigue",false);
+            movimiento.SetBool("Persigue", false);
             Patrullar();
         }
     }
@@ -107,7 +109,7 @@ public class MovimientoEnemigo : MonoBehaviour
         }
 
         // Verificar si el enemigo ha llegado al destino
-        if (Vector2.Distance(transform.position, destinoActual) < 0.1f ) //Estas dos condiciones extras son necesarias para evitar bugs despues de pasar por patrullaje
+        if (Vector2.Distance(transform.position, destinoActual) < 0.1f) //Estas dos condiciones extras son necesarias para evitar bugs despues de pasar por patrullaje
         {
             // Cambiar el destino al otro punto (xIzquierdaMax o xDerechaMax)
             if (destinoActual.x == posicionInicial.x - xIzquierdaMax)
@@ -129,9 +131,12 @@ public class MovimientoEnemigo : MonoBehaviour
         // Verificar si el objeto con el que colisiona tiene la etiqueta "Player"
         if (collision.gameObject.CompareTag("Player"))
         {
+            float knockback = 2 * ((collision.gameObject.transform.position.x - transform.position.x) / Math.Abs(collision.gameObject.transform.position.x - transform.position.x));
+            Debug.Log(knockback);
             // Mover al jugador a su posici�n inicial
-            collision.gameObject.transform.position = posicionInicialJugador;
-            movimiento.SetBool("Persigue",false);
+            collision.gameObject.transform.position = new Vector3(transform.position.x + knockback, collision.gameObject.transform.position.y, collision.gameObject.transform.position.z);
+            collision.gameObject.GetComponent<Player>().recibirDaño(daño);
+            //movimiento.SetBool("Persigue",false);
             jugadorCerca = false;
             Patrullar(); //Si la serpiente impacta con el jugador tenemos que volver al estado inicial
         }

@@ -33,9 +33,10 @@ public class PlayerAttack : MonoBehaviour
 
         // Infligir daño a los enemigos detectados
         foreach (Collider2D enemy in hitEnemies)
-        {   
-            if(enemy.CompareTag("Enemigo")){
-            enemy.GetComponent<Damageable>().TakeDamage(attackDamage);
+        {
+            if (enemy.CompareTag("Enemigo"))
+            {
+                enemy.GetComponent<Damageable>().TakeDamage(attackDamage);
             }
         }
     }
