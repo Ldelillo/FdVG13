@@ -132,7 +132,7 @@ public class MovimientoEnemigo : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             float knockback = 2 * ((collision.gameObject.transform.position.x - transform.position.x) / Math.Abs(collision.gameObject.transform.position.x - transform.position.x));
-            Debug.Log(knockback);
+            // Debug.Log(knockback);
             // Mover al jugador a su posici�n inicial
             collision.gameObject.transform.position = new Vector3(transform.position.x + knockback, collision.gameObject.transform.position.y, collision.gameObject.transform.position.z);
             collision.gameObject.GetComponent<Player>().recibirDaño(daño);
