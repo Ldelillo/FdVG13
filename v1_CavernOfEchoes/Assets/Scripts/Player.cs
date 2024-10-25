@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
-    public MovimientoJugador velocidad;
+    public MovimientoJugador mov;
     public PlayerAttack ataque;
     public float vida;
     public int defensa;
@@ -54,15 +54,24 @@ public class Player : MonoBehaviour
     }
     void cambioPrincipal()
     {
+        SpriteRenderer cambiocolor = GetComponent<SpriteRenderer>();
+        cambiocolor.color = Color.white;
         defensa = 1;
-        velocidad.speed = 5;
+        mov.speed = 5;
+        mov.jumpForce = 5;
+        mov.maxJumps = 2;
         ataque.attackDamage = 10;
         clase = 1;
+
     }
     void cambioTanque()
     {
+        SpriteRenderer cambiocolor = GetComponent<SpriteRenderer>();
+        cambiocolor.color = Color.blue;
         defensa = 10;
-        velocidad.speed = 3;
+        mov.speed = 3;
+        mov.jumpForce = 2;
+        mov.maxJumps = 1;
         ataque.attackDamage = 20;
         clase = 2;
     }

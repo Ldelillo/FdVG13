@@ -5,9 +5,9 @@ using UnityEngine;
 public class MovimientoJugador : MonoBehaviour
 {
     public float speed = 5f;      // Velocidad de movimiento del cubo
-    public float jumpForce = 5f;  // Fuerza del salto
+    public float jumpForce;  // Fuerza del salto
     private int jumpCount = 0;    // Contador de saltos realizados
-    public int maxJumps = 2;      // N�mero m�ximo de saltos permitidos (2 para doble salto)
+    public int maxJumps;      // N�mero m�ximo de saltos permitidos (2 para doble salto)
     private bool isGrounded;      // Para verificar si est� en el suelo
     private Rigidbody2D rb;       // Referencia al Rigidbody2D del cubo
 

@@ -1,11 +1,12 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class HealthStamina : MonoBehaviour
 {
     public Player player;
 
-    public float maxHealth = 100f;
+    public float maxHealth;
     public float currentHealth;
     public float maxStamina = 100f;
     public float currentStamina;
@@ -18,6 +19,7 @@ public class HealthStamina : MonoBehaviour
 
     void Start()
     {
+        maxHealth = player.vida;
         // currentHealth = maxHealth;
         currentStamina = maxStamina;
         cooldownTimer = 0f; // Inicializa el temporizador
@@ -28,9 +30,9 @@ public class HealthStamina : MonoBehaviour
     void Update()
     {
         // Simulación de recibir daño
-        if (Input.GetKeyDown(KeyCode.D))
+        if (Input.GetKeyDown(KeyCode.P))
         {
-            TakeDamage(10f);
+            TakeDamage(20f);
         }
 
         // Simulación de usar stamina solo si está completamente llena
@@ -62,7 +64,9 @@ public class HealthStamina : MonoBehaviour
 
     void TakeDamage(float amount)
     {
-        player.vida -= amount;
+        player.vida -= player.defensa >= amount ? 1 : (amount - player.defensa);
+
+        //player.vida -= amount - player.defensa;
         player.vida = Mathf.Clamp(player.vida, 0, maxHealth); // Asegúrate de que la salud no sea menor que 0
         UpdateHealthBar();
     }
