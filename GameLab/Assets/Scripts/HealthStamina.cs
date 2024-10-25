@@ -1,8 +1,10 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Tank : MonoBehaviour
+public class HealthStamina : MonoBehaviour
 {
+    public Player player;
+
     public float maxHealth = 100f;
     public float currentHealth;
     public float maxStamina = 100f;
@@ -16,7 +18,7 @@ public class Tank : MonoBehaviour
 
     void Start()
     {
-        currentHealth = maxHealth;
+        // currentHealth = maxHealth;
         currentStamina = maxStamina;
         cooldownTimer = 0f; // Inicializa el temporizador
         UpdateHealthBar();
@@ -31,32 +33,37 @@ public class Tank : MonoBehaviour
             TakeDamage(10f);
         }
 
-        // Simulación de usar stamina
-        if (Input.GetKeyDown(KeyCode.Space) && currentStamina > 0)
+        // Simulación de usar stamina solo si está completamente llena
+        if (Input.GetKeyDown(KeyCode.Mouse0) && currentStamina >= maxStamina)
         {
-            UseStamina(20f); // Ejemplo: usa 20 de stamina al atacar
+            UseStamina(20f); // Usa 20 de stamina al atacar
             cooldownTimer = attackCooldown; // Reinicia el temporizador de cooldown
         }
 
-        // Actualiza el cooldown
+        // Incrementa la stamina gradualmente si el cooldown ha terminado
+        if (cooldownTimer <= 0 && currentStamina < maxStamina)
+        {
+            // Calcula cuánto debe incrementarse la stamina por segundo para llenarse en attackCooldown
+            float staminaIncrement = maxStamina / attackCooldown * Time.deltaTime;
+            currentStamina = Mathf.Min(currentStamina + staminaIncrement, maxStamina); // Incrementa y limita a maxStamina
+            UpdateStaminaBar(); // Actualiza la barra de stamina mientras sube
+        }
+
+        // Actualiza el cooldown si todavía está en progreso
         if (cooldownTimer > 0)
         {
             cooldownTimer -= Time.deltaTime; // Reduce el temporizador
-            if (cooldownTimer <= 0) // Si el cooldown ha terminado
-            {
-                currentStamina = maxStamina; // Restaura la stamina al máximo
-                UpdateStaminaBar(); // Actualiza la barra de stamina
-            }
         }
 
-        // Actualiza la barra de vida
+        // Actualiza la barra de vida en cada frame
         UpdateHealthBar();
     }
 
+
     void TakeDamage(float amount)
     {
-        currentHealth -= amount;
-        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth); // Asegúrate de que la salud no sea menor que 0
+        player.vida -= amount;
+        player.vida = Mathf.Clamp(player.vida, 0, maxHealth); // Asegúrate de que la salud no sea menor que 0
         UpdateHealthBar();
     }
 
@@ -70,7 +77,7 @@ public class Tank : MonoBehaviour
     void UpdateHealthBar()
     {
         // Calcula el porcentaje de vida restante
-        float healthPercentage = currentHealth / maxHealth;
+        float healthPercentage = player.vida / maxHealth;
 
         // Inicia la corrutina para hacer la animación suave
         StartCoroutine(AnimateHealthBar(healthPercentage));

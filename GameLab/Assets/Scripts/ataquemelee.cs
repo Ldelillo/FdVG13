@@ -8,7 +8,7 @@ public class PlayerAttack : MonoBehaviour
     public Transform attackPoint;      // El punto desde donde se originará el ataque
     //public Animator animator;          // Controlador de animaciones del personaje
 
-    public float attackCooldown = 0.5f;   // Tiempo entre ataques
+    public float attackCooldown = 1f;   // Tiempo entre ataques
     private float nextAttackTime = 0f;    // Tiempo para el siguiente ataque
 
     public KeyCode attackKey = KeyCode.Z;

@@ -9,7 +9,7 @@ public class Player : MonoBehaviour
 {
     public MovimientoJugador velocidad;
     public PlayerAttack ataque;
-    public int vida;
+    public float vida;
     public int defensa;
     //private int nivel;
     private float experiencia;

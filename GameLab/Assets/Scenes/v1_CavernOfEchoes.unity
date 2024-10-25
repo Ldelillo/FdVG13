@@ -521,7 +521,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1609300797}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 896f6786bf4286a4c81fabc0e939015c, type: 3}
   m_Name: 
@@ -539,7 +539,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1609300797}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: a80017e955475f242a6b1cf3f84c9784, type: 3}
@@ -635,7 +635,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1609300797}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5db681b83d719954bad58a3cef144799, type: 3}
   m_Name: 
@@ -643,7 +643,7 @@ MonoBehaviour:
   attackRange: 0.5
   attackDamage: 10
   attackPoint: {fileID: 1514295531}
-  attackCooldown: 0.5
+  attackCooldown: 1.78
   attackKey: 323
   ataque: {fileID: 1609300799}
 --- !u!114 &1609300801
@@ -826,13 +826,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b98d57ac9d08d048b83ea6c947c67b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 200
+  player: {fileID: 1609300798}
+  maxHealth: 100
   currentHealth: 0
   maxStamina: 100
   currentStamina: 0
   HealthBar: {fileID: 21822856}
   StaminaBar: {fileID: 9181243609784028481}
-  attackCooldown: 3
+  attackCooldown: 1
   healthBarLerpSpeed: 2
   staminaBarLerpSpeed: 5
 --- !u!224 &1013637825998264206 stripped
@@ -874,7 +875,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6256584271198703017, guid: 17f28a8cf8ce27548913044b37e799b0, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 100
+      value: 100.1356
       objectReference: {fileID: 0}
     - target: {fileID: 6256584271198703017, guid: 17f28a8cf8ce27548913044b37e799b0, type: 3}
       propertyPath: m_SizeDelta.y
@@ -910,7 +911,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6256584271198703017, guid: 17f28a8cf8ce27548913044b37e799b0, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -162.7
+      value: -162.81522
       objectReference: {fileID: 0}
     - target: {fileID: 6256584271198703017, guid: 17f28a8cf8ce27548913044b37e799b0, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -927,6 +928,14 @@ PrefabInstance:
     - target: {fileID: 6256584271198703017, guid: 17f28a8cf8ce27548913044b37e799b0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6988968308217952332, guid: 17f28a8cf8ce27548913044b37e799b0, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 99.5013
+      objectReference: {fileID: 0}
+    - target: {fileID: 6988968308217952332, guid: 17f28a8cf8ce27548913044b37e799b0, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.2372
       objectReference: {fileID: 0}
     - target: {fileID: 7766674844624756138, guid: 17f28a8cf8ce27548913044b37e799b0, type: 3}
       propertyPath: m_Name
