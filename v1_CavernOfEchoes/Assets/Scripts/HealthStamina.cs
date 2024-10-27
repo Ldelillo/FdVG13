@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class HealthStamina : MonoBehaviour
@@ -12,124 +11,169 @@ public class HealthStamina : MonoBehaviour
     public float currentStamina;
     public Image HealthBar;
     public Image StaminaBar;
-    public float attackCooldown = 3f; // Tiempo de cooldown del ataque
-    private float cooldownTimer;
-    public float healthBarLerpSpeed = 5f; // Velocidad de interpolación para la barra de salud
-    public float staminaBarLerpSpeed = 5f; // Velocidad de interpolación para la barra de stamina
+
+    // Cooldown del ataque básico
+    public float attackCooldown = 3f;
+    private float attackCooldownTimer;
+
+    // Cooldown de la habilidad especial
+    public float abilityCooldown = 10f;
+    private float abilityCooldownTimer;
+    public Image abilityCooldownImage;
+    public Text abilityCooldownText;
+    private bool isAbilityOnCooldown = false;
+
+    public float healthBarLerpSpeed = 5f;
+    public float staminaBarLerpSpeed = 10f;
+
+    private int originalDefense; // Defensa original del jugador
+    public int defenseIncreaseAmount = 500; // Aumento de defensa
 
     void Start()
     {
         maxHealth = player.vida;
-        // currentHealth = maxHealth;
         currentStamina = maxStamina;
-        cooldownTimer = 0f; // Inicializa el temporizador
+        attackCooldownTimer = 0f;
+        abilityCooldownTimer = 0f;
         UpdateHealthBar();
         UpdateStaminaBar();
+
+        if (abilityCooldownImage != null) abilityCooldownImage.fillAmount = 0f;
+        if (abilityCooldownText != null) abilityCooldownText.text = "";
     }
 
     void Update()
     {
-        // Simulación de recibir daño
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            TakeDamage(20f);
-        }
+        if (Input.GetKeyDown(KeyCode.P)) TakeDamage(20f);
 
-        // Simulación de usar stamina solo si está completamente llena
         if (Input.GetKeyDown(KeyCode.Mouse0) && currentStamina >= maxStamina)
         {
-            UseStamina(20f); // Usa 20 de stamina al atacar
-            cooldownTimer = attackCooldown; // Reinicia el temporizador de cooldown
+            UseStamina(100f);
+            attackCooldownTimer = attackCooldown;
         }
 
-        // Incrementa la stamina gradualmente si el cooldown ha terminado
-        if (cooldownTimer <= 0 && currentStamina < maxStamina)
+        if (attackCooldownTimer <= 0 && currentStamina < maxStamina)
         {
-            // Calcula cuánto debe incrementarse la stamina por segundo para llenarse en attackCooldown
             float staminaIncrement = maxStamina / attackCooldown * Time.deltaTime;
-            currentStamina = Mathf.Min(currentStamina + staminaIncrement, maxStamina); // Incrementa y limita a maxStamina
-            UpdateStaminaBar(); // Actualiza la barra de stamina mientras sube
+            currentStamina = Mathf.Min(currentStamina + staminaIncrement, maxStamina);
+            UpdateStaminaBar();
         }
 
-        // Actualiza el cooldown si todavía está en progreso
-        if (cooldownTimer > 0)
+        if (attackCooldownTimer > 0) attackCooldownTimer -= Time.deltaTime;
+
+        if (isAbilityOnCooldown)
         {
-            cooldownTimer -= Time.deltaTime; // Reduce el temporizador
+            abilityCooldownTimer -= Time.deltaTime;
+            abilityCooldownImage.fillAmount = abilityCooldownTimer / abilityCooldown;
+            if (abilityCooldownText != null) abilityCooldownText.text = Mathf.Ceil(abilityCooldownTimer).ToString();
+
+            if (abilityCooldownTimer <= 0)
+            {
+                isAbilityOnCooldown = false;
+                abilityCooldownImage.fillAmount = 0f;
+                if (abilityCooldownText != null) abilityCooldownText.text = "";
+            }
         }
 
-        // Actualiza la barra de vida en cada frame
+        if (Input.GetKeyDown(KeyCode.Mouse1) && !isAbilityOnCooldown) ActivateAbility();
+
         UpdateHealthBar();
+    }
+
+    void ActivateAbility()
+    {
+        // Verifica si el jugador tiene la etiqueta "tanque"
+        if (gameObject.CompareTag("Tanque")) // Cambia "gameObject" si tu jugador es un objeto diferente
+        {
+            UseSpecialAbilityTank(); // Llama a la habilidad especial
+            isAbilityOnCooldown = true;
+            abilityCooldownTimer = abilityCooldown;
+            abilityCooldownImage.fillAmount = 1f;
+            if (abilityCooldownText != null) abilityCooldownText.text = Mathf.Ceil(abilityCooldownTimer).ToString();
+        }
+        else
+        {
+            Debug.Log("Este personaje no puede usar la habilidad especial."); // Mensaje de error (opcional)
+        }
     }
 
 
     void TakeDamage(float amount)
     {
         player.vida -= player.defensa >= amount ? 1 : (amount - player.defensa);
-
-        //player.vida -= amount - player.defensa;
-        player.vida = Mathf.Clamp(player.vida, 0, maxHealth); // Asegúrate de que la salud no sea menor que 0
+        player.vida = Mathf.Clamp(player.vida, 0, maxHealth);
         UpdateHealthBar();
     }
 
-    void UseStamina(float amount)
+    public void UseStamina(float amount)
     {
-        currentStamina = 0; // La stamina se reduce a 0 inmediatamente al atacar
-        UpdateStaminaBar();
-        StartCoroutine(AnimateStaminaBar(0f)); // Inicia la animación de la barra de stamina a 0
+        float targetStamina = Mathf.Max(0, currentStamina - amount);
+        StartCoroutine(AnimateStaminaBar(targetStamina / maxStamina));
+        currentStamina = targetStamina;
     }
 
     void UpdateHealthBar()
     {
-        // Calcula el porcentaje de vida restante
         float healthPercentage = player.vida / maxHealth;
-
-        // Inicia la corrutina para hacer la animación suave
         StartCoroutine(AnimateHealthBar(healthPercentage));
-
-        // Cambia el color de la barra según la salud restante
         UpdateHealthBarColor(healthPercentage);
     }
 
     private System.Collections.IEnumerator AnimateHealthBar(float targetHealthPercentage)
     {
-        // Mientras el valor de la barra no ha alcanzado el objetivo, sigue animando
         while (Mathf.Abs(HealthBar.fillAmount - targetHealthPercentage) > 0.01f)
         {
-            // Ajusta el valor de la barra suavemente usando Lerp
             HealthBar.fillAmount = Mathf.Lerp(HealthBar.fillAmount, targetHealthPercentage, Time.deltaTime * healthBarLerpSpeed);
-            yield return null; // Espera al siguiente frame
+            yield return null;
         }
-
-        // Asegúrate de que la barra de vida alcance exactamente el valor final
         HealthBar.fillAmount = targetHealthPercentage;
     }
 
     void UpdateStaminaBar()
     {
-        // Calcula el porcentaje de stamina restante
-        float staminaPercentage = currentStamina / maxStamina;
-
-        // Inicia la corrutina para hacer la animación suave
-        StartCoroutine(AnimateStaminaBar(staminaPercentage));
+        StaminaBar.fillAmount = currentStamina / maxStamina;
     }
 
     private System.Collections.IEnumerator AnimateStaminaBar(float targetStaminaPercentage)
     {
-        // Mientras el valor de la barra no ha alcanzado el objetivo, sigue animando
         while (Mathf.Abs(StaminaBar.fillAmount - targetStaminaPercentage) > 0.01f)
         {
-            // Ajusta el valor de la barra suavemente usando Lerp
             StaminaBar.fillAmount = Mathf.Lerp(StaminaBar.fillAmount, targetStaminaPercentage, Time.deltaTime * staminaBarLerpSpeed);
-            yield return null; // Espera al siguiente frame
+            yield return null;
         }
-
-        // Asegúrate de que la barra de stamina alcance exactamente el valor final
         StaminaBar.fillAmount = targetStaminaPercentage;
     }
 
     void UpdateHealthBarColor(float healthPercentage)
     {
-        // Cambia el color de la barra según la salud restante
         HealthBar.color = Color.Lerp(Color.red, Color.green, healthPercentage);
+    }
+
+    void UseSpecialAbilityTank()
+    {
+
+        // Lógica de la habilidad especial (ejemplo: curar al jugador)
+        // float healAmount = 20f; // Cantidad de vida a curar
+        // player.vida += healAmount;
+        // player.vida = Mathf.Clamp(player.vida, 0, maxHealth); // Asegúrate de que no exceda la salud máxima
+
+        // UpdateHealthBar(); // Actualiza la barra de salud
+
+        // Guarda la defensa original
+        originalDefense = player.defensa;
+
+        // Aumenta la defensa
+        player.defensa += defenseIncreaseAmount;
+
+        // Llama a la coroutine para revertir el efecto después de 3 segundos
+        StartCoroutine(ResetDefenseAfterDelay(3f));
+    }
+
+    private System.Collections.IEnumerator ResetDefenseAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay); // Espera el tiempo especificado
+
+        // Revertir la defensa al valor original
+        player.defensa = originalDefense;
     }
 }

@@ -54,6 +54,7 @@ public class Player : MonoBehaviour
     }
     void cambioPrincipal()
     {
+        gameObject.tag = "Player";
         SpriteRenderer cambiocolor = GetComponent<SpriteRenderer>();
         cambiocolor.color = Color.white;
         defensa = 1;
@@ -66,6 +67,7 @@ public class Player : MonoBehaviour
     }
     void cambioTanque()
     {
+        gameObject.tag = "Tanque";
         SpriteRenderer cambiocolor = GetComponent<SpriteRenderer>();
         cambiocolor.color = Color.blue;
         defensa = 10;

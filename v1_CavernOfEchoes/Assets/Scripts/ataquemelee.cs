@@ -11,7 +11,7 @@ public class PlayerAttack : MonoBehaviour
     public float attackCooldown = 1f;   // Tiempo entre ataques
     private float nextAttackTime = 0f;    // Tiempo para el siguiente ataque
 
-    public KeyCode attackKey = KeyCode.Z;
+    public KeyCode attackKey = KeyCode.Mouse0;
     public AudioSource ataque;
     void Update()
     {
