@@ -556,6 +556,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mov: {fileID: 1609300802}
   ataque: {fileID: 1609300800}
+  bar: {fileID: 1609300807}
   vida: 0
   defensa: 0
   animaciones: {fileID: 0}

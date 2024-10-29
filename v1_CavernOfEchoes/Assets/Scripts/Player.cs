@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
 {
     public MovimientoJugador mov;
     public PlayerAttack ataque;
+    public HealthStamina bar;
     public float vida;
     public int defensa;
     //private int nivel;
@@ -75,6 +76,8 @@ public class Player : MonoBehaviour
         mov.jumpForce = 2;
         mov.maxJumps = 1;
         ataque.attackDamage = 20;
+        ataque.attackCooldown = 2;
+        bar.attackCooldown = 1;
         clase = 2;
     }
 }
