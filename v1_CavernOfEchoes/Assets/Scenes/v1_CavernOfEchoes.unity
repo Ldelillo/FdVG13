@@ -671,7 +671,7 @@ MonoBehaviour:
   attackRange: 0.5
   attackDamage: 10
   attackPoint: {fileID: 1514295531}
-  attackCooldown: 1.78
+  attackCooldown: 1
   attackKey: 323
   ataque: {fileID: 1609300799}
 --- !u!114 &1609300801
@@ -861,7 +861,7 @@ MonoBehaviour:
   currentStamina: 0
   HealthBar: {fileID: 21822856}
   StaminaBar: {fileID: 9181243609784028481}
-  attackCooldown: 1
+  attackCooldown: 0.5
   abilityCooldown: 10
   abilityCooldownImage: {fileID: 39344025}
   abilityCooldownText: {fileID: 426031144}
