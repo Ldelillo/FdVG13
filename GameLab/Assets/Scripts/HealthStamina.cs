@@ -13,8 +13,8 @@ public class HealthStamina : MonoBehaviour
     public Image StaminaBar;
     public float attackCooldown = 3f; // Tiempo de cooldown del ataque
     private float cooldownTimer;
-    public float healthBarLerpSpeed = 5f; // Velocidad de interpolación para la barra de salud
-    public float staminaBarLerpSpeed = 5f; // Velocidad de interpolación para la barra de stamina
+    public float healthBarLerpSpeed = 5f; // Velocidad de interpolaciï¿½n para la barra de salud
+    public float staminaBarLerpSpeed = 5f; // Velocidad de interpolaciï¿½n para la barra de stamina
 
     void Start()
     {
@@ -27,13 +27,13 @@ public class HealthStamina : MonoBehaviour
 
     void Update()
     {
-        // Simulación de recibir daño
+        // Simulaciï¿½n de recibir daï¿½o
         if (Input.GetKeyDown(KeyCode.D))
         {
             TakeDamage(10f);
         }
 
-        // Simulación de usar stamina solo si está completamente llena
+        // Simulaciï¿½n de usar stamina solo si estï¿½ completamente llena
         if (Input.GetKeyDown(KeyCode.Mouse0) && currentStamina >= maxStamina)
         {
             UseStamina(20f); // Usa 20 de stamina al atacar
@@ -43,13 +43,13 @@ public class HealthStamina : MonoBehaviour
         // Incrementa la stamina gradualmente si el cooldown ha terminado
         if (cooldownTimer <= 0 && currentStamina < maxStamina)
         {
-            // Calcula cuánto debe incrementarse la stamina por segundo para llenarse en attackCooldown
+            // Calcula cuï¿½nto debe incrementarse la stamina por segundo para llenarse en attackCooldown
             float staminaIncrement = maxStamina / attackCooldown * Time.deltaTime;
             currentStamina = Mathf.Min(currentStamina + staminaIncrement, maxStamina); // Incrementa y limita a maxStamina
             UpdateStaminaBar(); // Actualiza la barra de stamina mientras sube
         }
 
-        // Actualiza el cooldown si todavía está en progreso
+        // Actualiza el cooldown si todavï¿½a estï¿½ en progreso
         if (cooldownTimer > 0)
         {
             cooldownTimer -= Time.deltaTime; // Reduce el temporizador
@@ -63,7 +63,7 @@ public class HealthStamina : MonoBehaviour
     void TakeDamage(float amount)
     {
         player.vida -= amount;
-        player.vida = Mathf.Clamp(player.vida, 0, maxHealth); // Asegúrate de que la salud no sea menor que 0
+        player.vida = Mathf.Clamp(player.vida, 0, maxHealth); // Asegï¿½rate de que la salud no sea menor que 0
         UpdateHealthBar();
     }
 
@@ -71,7 +71,7 @@ public class HealthStamina : MonoBehaviour
     {
         currentStamina = 0; // La stamina se reduce a 0 inmediatamente al atacar
         UpdateStaminaBar();
-        StartCoroutine(AnimateStaminaBar(0f)); // Inicia la animación de la barra de stamina a 0
+        StartCoroutine(AnimateStaminaBar(0f)); // Inicia la animaciï¿½n de la barra de stamina a 0
     }
 
     void UpdateHealthBar()
@@ -79,10 +79,10 @@ public class HealthStamina : MonoBehaviour
         // Calcula el porcentaje de vida restante
         float healthPercentage = player.vida / maxHealth;
 
-        // Inicia la corrutina para hacer la animación suave
+        // Inicia la corrutina para hacer la animaciï¿½n suave
         StartCoroutine(AnimateHealthBar(healthPercentage));
 
-        // Cambia el color de la barra según la salud restante
+        // Cambia el color de la barra segï¿½n la salud restante
         UpdateHealthBarColor(healthPercentage);
     }
 
@@ -96,7 +96,7 @@ public class HealthStamina : MonoBehaviour
             yield return null; // Espera al siguiente frame
         }
 
-        // Asegúrate de que la barra de vida alcance exactamente el valor final
+        // Asegï¿½rate de que la barra de vida alcance exactamente el valor final
         HealthBar.fillAmount = targetHealthPercentage;
     }
 
@@ -105,7 +105,7 @@ public class HealthStamina : MonoBehaviour
         // Calcula el porcentaje de stamina restante
         float staminaPercentage = currentStamina / maxStamina;
 
-        // Inicia la corrutina para hacer la animación suave
+        // Inicia la corrutina para hacer la animaciï¿½n suave
         StartCoroutine(AnimateStaminaBar(staminaPercentage));
     }
 
@@ -119,13 +119,13 @@ public class HealthStamina : MonoBehaviour
             yield return null; // Espera al siguiente frame
         }
 
-        // Asegúrate de que la barra de stamina alcance exactamente el valor final
+        // Asegï¿½rate de que la barra de stamina alcance exactamente el valor final
         StaminaBar.fillAmount = targetStaminaPercentage;
     }
 
     void UpdateHealthBarColor(float healthPercentage)
     {
-        // Cambia el color de la barra según la salud restante
+        // Cambia el color de la barra segï¿½n la salud restante
         HealthBar.color = Color.Lerp(Color.red, Color.green, healthPercentage);
     }
 }
