@@ -11,9 +11,6 @@ public class Player : MonoBehaviour
     public PlayerAttack ataque;
     public float vida;
     public int defensa;
-    //private int nivel;
-    private float experiencia;
-    //private int requisitoExp;
     public Animator animaciones;
     private Collider2D hitbox;
     public int clase;
@@ -22,8 +19,6 @@ public class Player : MonoBehaviour
     void Start()
     {
         hitbox = GetComponent<Collider2D>();
-        //nivel = 0;
-        experiencia = 0;
         vida = 100;
         defensa = 1;
         clase = 1;
@@ -47,10 +42,6 @@ public class Player : MonoBehaviour
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
-    }
-    public void expUP(float experiencia)
-    {
-        this.experiencia = experiencia;
     }
     void cambioPrincipal()
     {
