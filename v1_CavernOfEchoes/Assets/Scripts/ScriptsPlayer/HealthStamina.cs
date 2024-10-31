@@ -6,13 +6,13 @@ public class HealthStamina : MonoBehaviour
     public Player player;
 
     public float maxHealth;
-    public float currentHealth;
+    //public float currentHealth;
     public float maxStamina = 100f;
     public float currentStamina;
     public Image HealthBar;
     public Image StaminaBar;
 
-    // Cooldown del ataque básico
+    // Cooldown del ataque bï¿½sico
     public float attackCooldown = 3f;
     private float attackCooldownTimer;
 
@@ -27,7 +27,7 @@ public class HealthStamina : MonoBehaviour
     public float staminaBarLerpSpeed = 10f;
 
     private int originalDefense; // Defensa original del jugador
-    public int defenseIncreaseAmount = 500; // Aumento de defensa
+    public int defenseUPHability = 500; // Aumento de defensa
 
     void Start()
     {
@@ -100,7 +100,7 @@ public class HealthStamina : MonoBehaviour
 
     void TakeDamage(float amount)
     {
-        player.vida -= player.defensa >= amount ? 1 : (amount - player.defensa);
+        player.vida -= player.actual.defensa >= amount ? 1 : (amount - player.actual.defensa);
         player.vida = Mathf.Clamp(player.vida, 0, maxHealth);
         UpdateHealthBar();
     }
@@ -152,28 +152,30 @@ public class HealthStamina : MonoBehaviour
     void UseSpecialAbilityTank()
     {
 
-        // Lógica de la habilidad especial (ejemplo: curar al jugador)
+        // Lï¿½gica de la habilidad especial (ejemplo: curar al jugador)
         // float healAmount = 20f; // Cantidad de vida a curar
         // player.vida += healAmount;
-        // player.vida = Mathf.Clamp(player.vida, 0, maxHealth); // Asegúrate de que no exceda la salud máxima
+        // player.vida = Mathf.Clamp(player.vida, 0, maxHealth); // Asegï¿½rate de que no exceda la salud mï¿½xima
 
         // UpdateHealthBar(); // Actualiza la barra de salud
 
         // Guarda la defensa original
-        originalDefense = player.defensa;
+        originalDefense = player.actual.defensa;
 
         // Aumenta la defensa
-        player.defensa += defenseIncreaseAmount;
+        player.actual.defensa += defenseUPHability;
 
-        // Llama a la coroutine para revertir el efecto después de 3 segundos
+        // Llama a la coroutine para revertir el efecto despuï¿½s de 3 segundos
         StartCoroutine(ResetDefenseAfterDelay(3f));
     }
 
     private System.Collections.IEnumerator ResetDefenseAfterDelay(float delay)
     {
+        player.habInUse = true;
         yield return new WaitForSeconds(delay); // Espera el tiempo especificado
 
         // Revertir la defensa al valor original
-        player.defensa = originalDefense;
+        player.actual.defensa -= defenseUPHability;
+        player.habInUse = false;
     }
 }

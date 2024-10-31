@@ -8,8 +8,10 @@ public class MovimientoJugador : MonoBehaviour
     public float jumpForce;  // Fuerza del salto
     private int jumpCount = 0;    // Contador de saltos realizados
     public int maxJumps;      // N�mero m�ximo de saltos permitidos (2 para doble salto)
-    private bool isGrounded;      // Para verificar si est� en el suelo
+    public bool isGrounded;      // Para verificar si est� en el suelo
     private Rigidbody2D rb;       // Referencia al Rigidbody2D del cubo
+    public float horizontal;
+    public float mirando;
 
     void Start()
     {
@@ -19,10 +21,11 @@ public class MovimientoJugador : MonoBehaviour
     void Update()
     {
         // Movimiento horizontal (A/D o flechas)
-        float horizontal = Input.GetAxis("Horizontal");
+        horizontal = Input.GetAxis("Horizontal");
 
         // Crear el vector de movimiento (solo en el eje X)
         Vector2 movement = new Vector2(horizontal * speed, rb.velocity.y);
+        mirando = movement.x;
 
         // Aplicar movimiento al Rigidbody2D
         rb.velocity = movement;

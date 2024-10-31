@@ -23,6 +23,5 @@ public class Damageable : MonoBehaviour
     {
         // Reproducir animación de muerte, sonido o algún efecto visual
         Destroy(gameObject); // Destruir el objeto del enemigo
-        jugador.expUP(experiencia);
     }
 }

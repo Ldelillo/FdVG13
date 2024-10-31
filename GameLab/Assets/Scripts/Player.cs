@@ -5,6 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+
 public class Player : MonoBehaviour
 {
     public MovimientoJugador velocidad;

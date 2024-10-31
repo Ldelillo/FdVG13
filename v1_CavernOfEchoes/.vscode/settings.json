@@ -56,5 +56,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "GameLab.sln"
+    "dotnet.defaultSolution": "v1_CavernOfEchoes.sln"
 }
