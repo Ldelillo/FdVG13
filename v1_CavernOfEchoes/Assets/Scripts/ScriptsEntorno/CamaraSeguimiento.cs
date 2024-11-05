@@ -8,14 +8,14 @@ public class CamaraSeguimiento : MonoBehaviour
     public float smoothSpeed = 0.125f; // Suavidad del movimiento de la cámara
     public Vector2 minPosition;    // Límites mínimos para la cámara
     public Vector2 maxPosition;    // Límites máximos para la cámara
-    public float yOffset = 2f;     // Altura fija de la cámara (como en Super Mario)
+    public float yOffset = 2f;     // Altura adicional de la cámara
 
     void LateUpdate()
     {
         if (target != null)
         {
-            // Mantén la cámara con la posición del jugador en X y un offset fijo en Y
-            Vector3 desiredPosition = new Vector3(target.position.x, yOffset, transform.position.z);
+            // Actualiza la posición deseada en X y Y para que siga al jugador, y aplica un offset adicional en Y si se requiere
+            Vector3 desiredPosition = new Vector3(target.position.x, target.position.y + yOffset, transform.position.z);
 
             // Suaviza el movimiento de la cámara con Lerp para un seguimiento más suave
             Vector3 smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed);
