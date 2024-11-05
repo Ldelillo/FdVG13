@@ -16,7 +16,7 @@ MonoBehaviour:
   speed: 5
   defensa: 10
   ataque: 10
-  jumpForce: 7.5
-  maxJumps: 2
+  jumpForce: 6
+  maxJumps: 1
   habCD: 10000
   atqCD: 1

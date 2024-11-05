@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nombre: Arquero
   speed: 6
-  defensa: 0
+  defensa: 500
   ataque: 15
-  jumpForce: 6
+  jumpForce: 7.5
   maxJumps: 2
   habCD: 7
   atqCD: 0.7
