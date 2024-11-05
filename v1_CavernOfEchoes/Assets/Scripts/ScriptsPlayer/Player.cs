@@ -66,6 +66,31 @@ public class Player : MonoBehaviour
         animacion.SetInteger("Change",0);
         
     }
+
+    // Nuevo método para desactivar el movimiento al colisionar con la rampa
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        // Comprobamos si la colisión es con un objeto etiquetado como "Rampa"
+        if (collision.gameObject.CompareTag("Rampa"))
+        {
+            // Desactivamos el movimiento
+            mov.enabled = false;
+            // Debug.Log("Movimiento desactivado al colisionar con la rampa");
+        }
+    }
+
+    // Reactivar el movimiento cuando el jugador sale de la rampa
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        // Comprobamos si estamos saliendo de una colisión con un objeto etiquetado como "Rampa"
+        if (collision.gameObject.CompareTag("Rampa"))
+        {
+            // Reactivamos el movimiento
+            mov.enabled = true;
+            // Debug.Log("Movimiento reactivado al salir de la rampa");
+        }
+    }
+
     public void recibirDaño(int ataqueE)
     {
         vida -= actual.defensa >= ataqueE ? 1 : ataqueE - actual.defensa;
