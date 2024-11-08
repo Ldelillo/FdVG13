@@ -33,21 +33,23 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        animacion.SetInteger("Change",0);
         if (Input.GetKeyDown(KeyCode.Alpha1) && actual.nombre != "Player" && !habInUse)
         {
             actual = principal;
-            updateStats();
             animacion.SetInteger("Change",1);
+            updateStats();
         }
         else if (Input.GetKeyDown(KeyCode.Alpha2) && actual.nombre != "Tanque" && !habInUse)
         {
             actual = tanque;
-            updateStats();
             animacion.SetInteger("Change",2);
+            updateStats();
         }
         else if (Input.GetKeyDown(KeyCode.Alpha3) && actual.nombre != "Arquero" && !habInUse)
         {
             actual = arquero;
+            animacion.SetInteger("Change",3);
             updateStats();
         }
         if(!mov.isGrounded){
@@ -63,7 +65,7 @@ public class Player : MonoBehaviour
         else if (mov.horizontal<0){
             transform.localScale = new Vector3(-1, 1, 1);
         }
-        animacion.SetInteger("Change",0);
+        
         
     }
 
