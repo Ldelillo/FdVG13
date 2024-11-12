@@ -19,6 +19,8 @@ public class Player : MonoBehaviour
     public int clase;
     public Boolean habInUse;
     private Animator animacion;
+    private bool puedeCambiarAArquero = false;
+    private bool puedeCambiarATanque = false;
 
     // Start is called before the first frame update
     void Start()
@@ -40,13 +42,13 @@ public class Player : MonoBehaviour
             animacion.SetInteger("Change",1);
             updateStats();
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha2) && actual.nombre != "Tanque" && !habInUse)
+        else if (Input.GetKeyDown(KeyCode.Alpha2) && actual.nombre != "Tanque" && !habInUse && puedeCambiarATanque)
         {
             actual = tanque;
             animacion.SetInteger("Change",2);
             updateStats();
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha3) && actual.nombre != "Arquero" && !habInUse)
+        else if (Input.GetKeyDown(KeyCode.Alpha3) && actual.nombre != "Arquero" && !habInUse && puedeCambiarAArquero)
         {
             actual = arquero;
             animacion.SetInteger("Change",3);
@@ -113,6 +115,19 @@ public class Player : MonoBehaviour
         //Animator change
         //habilidad = 
     }
+
+    public void HabilitarTanque()
+    {
+        puedeCambiarATanque = true;
+        Debug.Log("Ahora puedes cambiar a tanque");
+    }
+
+    public void HabilitarArquero()
+    {
+        puedeCambiarAArquero = true;
+        Debug.Log("Ahora puedes cambiar a arquero");
+    }
+
     /*
     void cambioPrincipal()
     {
