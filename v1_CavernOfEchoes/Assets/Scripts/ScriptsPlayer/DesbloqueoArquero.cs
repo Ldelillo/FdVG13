@@ -5,14 +5,21 @@ public class DesbloqueoArquero : MonoBehaviour
     public bool habilidadDesbloqueada = false; // Controla si la habilidad ya está desbloqueada
     private bool jugadorEnZona = false; // Para detectar si el jugador está en la zona
 
-    public GameObject iconoTeclaE;
+    public GameObject iconoTeclaE; // Ícono de la tecla E
+    public GameObject panelGuia; // Panel de guía
+    private bool panelAbierto = false; // Controla si el panel está abierto
 
     private void Start()
     {
-        // Asegúrate de que el ícono esté desactivado al inicio
+        // Asegúrate de que el ícono de tecla E y el panel de guía estén desactivados al inicio
         if (iconoTeclaE != null)
         {
             iconoTeclaE.SetActive(false);
+        }
+
+        if (panelGuia != null)
+        {
+            panelGuia.SetActive(false); // Desactiva el panel de guía al inicio
         }
     }
 
@@ -53,17 +60,42 @@ public class DesbloqueoArquero : MonoBehaviour
                 iconoTeclaE.SetActive(false); // Desactiva el ícono después de desbloquear la habilidad
             }
         }
+
+        // Verifica si el jugador presiona Esc para cerrar el panel
+        if (panelAbierto && Input.GetKeyDown(KeyCode.Escape))
+        {
+            CerrarPanelGuia();
+        }
     }
 
     private void DesbloquearHabilidad()
     {
         habilidadDesbloqueada = true;
-        // Llama al método del jugador para activar la habilidad
+
+        // Activa la habilidad de arquero en el jugador
         Player jugador = FindObjectOfType<Player>();
         if (jugador != null)
         {
             jugador.HabilitarArquero();
             Debug.Log("¡Habilidad de cambio de personaje desbloqueada!");
+        }
+
+        // Activa el panel de guía y congela el juego
+        if (panelGuia != null)
+        {
+            panelGuia.SetActive(true);
+            panelAbierto = true;
+            Time.timeScale = 0; // Congela el juego
+        }
+    }
+
+    private void CerrarPanelGuia()
+    {
+        if (panelGuia != null)
+        {
+            panelGuia.SetActive(false);
+            panelAbierto = false;
+            Time.timeScale = 1; // Reanuda el juego
         }
     }
 }
