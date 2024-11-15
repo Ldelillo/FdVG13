@@ -121,8 +121,6 @@ public class MovimientoEnemigo : MonoBehaviour
                 destinoActual = new Vector3(posicionInicial.x - xIzquierdaMax, transform.position.y, transform.position.z);
             }
         }
-
-
     }
 
     // Detectar colisiones con el jugador
