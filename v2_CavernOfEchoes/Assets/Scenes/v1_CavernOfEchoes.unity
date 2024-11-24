@@ -5161,7 +5161,8 @@ MonoBehaviour:
   attackPoint: {fileID: 1514295531}
   attackCooldown: 1
   attackKey: 323
-  ataque: {fileID: 1609300799}
+  attackSound: {fileID: 1609300799}
+  autoTarget: 0
 --- !u!114 &1609300801
 MonoBehaviour:
   m_ObjectHideFlags: 0

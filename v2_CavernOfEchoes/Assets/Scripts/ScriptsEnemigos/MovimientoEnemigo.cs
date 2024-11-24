@@ -127,7 +127,7 @@ public class MovimientoEnemigo : MonoBehaviour
     void OnCollisionEnter2D(Collision2D collision)
     {
         // Verificar si el objeto con el que colisiona tiene la etiqueta "Player"
-        if (collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player") || collision.gameObject.CompareTag("Arquero") || collision.gameObject.CompareTag("Tanque"))
         {
             float knockback = 2 * ((collision.gameObject.transform.position.x - transform.position.x) / Math.Abs(collision.gameObject.transform.position.x - transform.position.x));
             // Debug.Log(knockback);
