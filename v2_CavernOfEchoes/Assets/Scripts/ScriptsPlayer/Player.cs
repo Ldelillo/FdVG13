@@ -22,6 +22,8 @@ public class Player : MonoBehaviour
     private bool puedeCambiarAArquero = false;
     private bool puedeCambiarATanque = false;
 
+    public int mirandoHacia;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -30,6 +32,7 @@ public class Player : MonoBehaviour
         animacion = GetComponent<Animator>();
         vida = 100;
         actual = principal;
+        mirandoHacia = 1;
         updateStats();
     }
 
@@ -61,11 +64,11 @@ public class Player : MonoBehaviour
             animacion.SetBool("Salto",false);
         }
         animacion.SetFloat("Moving",Mathf.Abs(mov.horizontal));
-        if(mov.horizontal>0){
-            transform.localScale = new Vector3(1, 1, 1);
+        if(mov.horizontal>0 && mirandoHacia < 0){
+           rotar();
         }
-        else if (mov.horizontal<0){
-            transform.localScale = new Vector3(-1, 1, 1);
+        else if (mov.horizontal<0 && mirandoHacia > 0){
+            rotar();
         }
         
         
@@ -95,6 +98,10 @@ public class Player : MonoBehaviour
         }
     }
 
+    private void rotar(){
+        mirandoHacia *= -1;
+        transform.eulerAngles = new Vector3(0, transform.eulerAngles.y + 180,0);
+    }
     public void recibirDaño(int ataqueE)
     {
         vida -= actual.defensa >= ataqueE ? 1 : ataqueE - actual.defensa;

@@ -27,12 +27,13 @@ public class PlayerAttack : MonoBehaviour
         {
             UpdateAttackPointByMouse();
         }
-
+        if(!gameObject.CompareTag("Arquero")){
         if (Time.time >= nextAttackTime && Input.GetKeyDown(attackKey))
         {
             attackSound.Play();
             PerformAttack();
             nextAttackTime = Time.time + attackCooldown;
+        }
         }
     }
 

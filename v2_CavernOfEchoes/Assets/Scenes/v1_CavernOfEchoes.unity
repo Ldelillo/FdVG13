@@ -5080,6 +5080,7 @@ MonoBehaviour:
   vida: 100
   clase: 0
   habInUse: 0
+  mirandoHacia: 0
 --- !u!82 &1609300799
 AudioSource:
   m_ObjectHideFlags: 0

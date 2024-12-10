@@ -8,11 +8,12 @@ public class disparoJugador : MonoBehaviour
     [SerializeField] private GameObject flecha;
 
     private void Update()
-    {
-        if(Input.GetButtonDown("Fire2"))
+    {  if(gameObject.CompareTag("Arquero")){
+        if(Input.GetButtonDown("Fire1"))
         {
              Disparar();   
         }
+       }
     }
     private void Disparar()
     {
