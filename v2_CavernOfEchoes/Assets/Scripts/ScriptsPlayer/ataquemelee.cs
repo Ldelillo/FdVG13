@@ -16,9 +16,13 @@ public class PlayerAttack : MonoBehaviour
 
     // Opción de accesibilidad
     public bool autoTarget = false;
-
+    private Animator animacion;
+    void Start(){
+        animacion = GetComponent<Animator>();
+    }
     void Update()
     {
+        animacion.SetBool("Ataque",false);
         if (autoTarget)
         {
             UpdateAttackPointToNearestEnemy();
@@ -29,7 +33,8 @@ public class PlayerAttack : MonoBehaviour
         }
         if(!gameObject.CompareTag("Arquero")){
         if (Time.time >= nextAttackTime && Input.GetKeyDown(attackKey))
-        {
+        {   
+            animacion.SetBool("Ataque",true);
             attackSound.Play();
             PerformAttack();
             nextAttackTime = Time.time + attackCooldown;

@@ -17,7 +17,7 @@ public class HealthStamina : MonoBehaviour
     private float attackCooldownTimer;
 
     // Cooldown de la habilidad especial
-    public float abilityCooldown = 10f;
+    public float abilityCooldown;
     private float abilityCooldownTimer;
     public Image abilityCooldownImage;
     public Text abilityCooldownText;
@@ -87,10 +87,19 @@ public class HealthStamina : MonoBehaviour
         {
             UseSpecialAbilityTank(); // Llama a la habilidad especial
             isAbilityOnCooldown = true;
+            abilityCooldown = 10f;
             abilityCooldownTimer = abilityCooldown;
             abilityCooldownImage.fillAmount = 1f;
             if (abilityCooldownText != null) abilityCooldownText.text = Mathf.Ceil(abilityCooldownTimer).ToString();
         }
+        else if (gameObject.CompareTag("Arquero")){
+            UseSpecialAbilityArcher();
+            isAbilityOnCooldown = true;
+            abilityCooldown = 3f;
+            abilityCooldownTimer = abilityCooldown;
+            abilityCooldownImage.fillAmount = 1f;
+            if (abilityCooldownText != null) abilityCooldownText.text = Mathf.Ceil(abilityCooldownTimer).ToString();
+        } 
         else
         {
             Debug.Log("Este personaje no puede usar la habilidad especial."); // Mensaje de error (opcional)
@@ -178,4 +187,37 @@ public class HealthStamina : MonoBehaviour
         player.actual.defensa -= defenseUPHability;
         player.habInUse = false;
     }
+void UseSpecialAbilityArcher()
+{
+    // Convertir la posición del mouse a un punto en el espacio 2D
+    Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+    // El rayo debe ser proyectado perpendicularmente al plano de la cámara, que es en el eje Z
+    // En un juego 2D, lo que necesitamos es que el rayo se proyecte a lo largo del eje Z,
+    // así que usamos la dirección 2D (usando Vector2.zero) para no cambiar la orientación
+    Vector2 direction = Vector2.zero;  // Esto asegura que el rayo no tenga dirección específica
+
+    // Realizar el Raycast 2D desde la posición del mouse
+    RaycastHit2D hit = Physics2D.Raycast(mousePosition, direction);
+
+    // Dibujar el rayo para depuración
+    Debug.DrawRay(mousePosition, direction * 10f, Color.red, 1f); // *10f es la longitud del rayo
+
+    if (hit.collider != null)
+    {
+
+        // Verificar si el collider tiene la etiqueta "Enemigo"
+        if (hit.collider.CompareTag("Enemigo"))
+        {
+            Debug.Log("Enemigo impactado: " + hit.collider.name);
+
+            // Realizar daño al enemigo
+            hit.collider.GetComponent<Damageable>().TakeDamage(30);
+        }
+        else{
+            Debug.Log(hit.collider.tag);
+        }
+    }
+}
+
 }
