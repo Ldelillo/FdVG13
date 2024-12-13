@@ -19,8 +19,8 @@ public class Player : MonoBehaviour
     public int clase;
     public Boolean habInUse;
     private Animator animacion;
-    private bool puedeCambiarAArquero = false;
-    private bool puedeCambiarATanque = true;
+    private bool puedeCambiarAArquero = true;
+    private bool puedeCambiarATanque = false;
 
     public int mirandoHacia;
 

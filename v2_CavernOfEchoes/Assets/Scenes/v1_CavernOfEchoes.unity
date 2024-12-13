@@ -2937,7 +2937,7 @@ Camera:
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
-  orthographic: 0
+  orthographic: 1
   orthographic size: 5
   m_Depth: -1
   m_CullingMask:
@@ -5196,6 +5196,8 @@ MonoBehaviour:
   attackKey: 323
   attackSound: {fileID: 1609300799}
   autoTarget: 0
+  controladorDisparo: {fileID: 1083561696}
+  flecha: {fileID: 4206672094271981018, guid: 195c0c92e507c6c4fa04c7e33cecfcd2, type: 3}
 --- !u!114 &1609300801
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5263,7 +5265,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.31, y: 0.65}
+    oldSize: {x: 0.3263158, y: 0.68421054}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -5457,7 +5459,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1609300797}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1bcecd662aff8aa4e9759aa1e5ec184c, type: 3}
   m_Name: 

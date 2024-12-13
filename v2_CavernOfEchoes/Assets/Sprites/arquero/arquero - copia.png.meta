@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 7607fa9bbd64de642b86101f14c6eaa1
+guid: 383dbea640a08234dac52c24ac27a93f
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -48,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 95
+  spritePixelsToUnits: 135
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -110,202 +110,160 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Run_0
+      name: arquero - copia_0
       rect:
         serializedVersion: 2
-        x: 38
-        y: 0
-        width: 39
-        height: 67
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 586f1e05eb62ecc4d920281d3cac6fe4
-      internalID: -1201742123
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Run_1
-      rect:
-        serializedVersion: 2
-        x: 165
-        y: 0
-        width: 39
-        height: 66
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 674bd4bb730421e4a812861234af2557
-      internalID: 1469748208
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Run_2
-      rect:
-        serializedVersion: 2
-        x: 283
-        y: 4
-        width: 53
-        height: 62
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 00086636ea18d43429f358f8de7c964a
-      internalID: 1536396697
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Run_3
-      rect:
-        serializedVersion: 2
-        x: 412
-        y: 0
-        width: 49
-        height: 65
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 106ad8a92ba2e8c4c91b08889aba7d09
-      internalID: -491924406
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Run_4
-      rect:
-        serializedVersion: 2
-        x: 542
-        y: 0
-        width: 37
-        height: 66
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 636e0c13c26739a4ba804b7678c3b710
-      internalID: -1090522934
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Run_5
-      rect:
-        serializedVersion: 2
-        x: 680
-        y: 0
-        width: 37
-        height: 67
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f6ed4a9868f41af46bd8702e35a87b12
-      internalID: 1329077688
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Run_6
-      rect:
-        serializedVersion: 2
-        x: 805
-        y: 0
-        width: 40
-        height: 66
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f5a198695dbb3084a9dfcc75a85612be
-      internalID: -1715163186
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Run_7
-      rect:
-        serializedVersion: 2
-        x: 925
-        y: 4
-        width: 51
-        height: 62
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: fdcc5aa04a2ab944fa5984bd27cb382e
-      internalID: -1278932570
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Run_8
-      rect:
-        serializedVersion: 2
-        x: 1054
+        x: 0
         y: 2
-        width: 51
-        height: 63
+        width: 130
+        height: 100
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bf706a4de9fcd594396597da170231f3
-      internalID: -464862633
+      spriteID: 7ce8b153256f3a64e8722eb1b17809e7
+      internalID: 537528420
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Run_9
+      name: arquero - copia_1
       rect:
         serializedVersion: 2
-        x: 1183
+        x: 130
+        y: 2
+        width: 130
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 48ab64a039e62b84b915d10f114ea8b7
+      internalID: -486756239
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: arquero - copia_2
+      rect:
+        serializedVersion: 2
+        x: 260
+        y: 2
+        width: 130
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 830db657b9c8bf7469230dbf36db4432
+      internalID: -1022930082
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: arquero - copia_3
+      rect:
+        serializedVersion: 2
+        x: 390
+        y: 2
+        width: 130
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fc0fd9b40f48d0d4c859ea16f09c9565
+      internalID: 384864272
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: arquero - copia_4
+      rect:
+        serializedVersion: 2
+        x: 520
+        y: 2
+        width: 130
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d1b852343602bb5418a305634a5b4fa4
+      internalID: 76922387
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: arquero - copia_5
+      rect:
+        serializedVersion: 2
+        x: 650
+        y: 2
+        width: 130
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8cd1475d4f244d6469b82e2119376e9f
+      internalID: 221971171
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: arquero - copia_6
+      rect:
+        serializedVersion: 2
+        x: 780
+        y: 2
+        width: 130
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 512c9209747544244a7710fcc99341e6
+      internalID: -671613522
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: arquero - copia_7
+      rect:
+        serializedVersion: 2
+        x: 911
         y: 0
-        width: 36
-        height: 66
+        width: 107
+        height: 102
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -313,8 +271,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7f35ff3aef9259d43803fe64a65d3f9e
-      internalID: 1224639392
+      spriteID: b760b41090f870445968703122620f6a
+      internalID: -826899955
       vertices: []
       indices: 
       edges: []
@@ -330,16 +288,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Run_0: -1201742123
-      Run_1: 1469748208
-      Run_2: 1536396697
-      Run_3: -491924406
-      Run_4: -1090522934
-      Run_5: 1329077688
-      Run_6: -1715163186
-      Run_7: -1278932570
-      Run_8: -464862633
-      Run_9: 1224639392
+      arquero - copia_0: 537528420
+      arquero - copia_1: -486756239
+      arquero - copia_2: -1022930082
+      arquero - copia_3: 384864272
+      arquero - copia_4: 76922387
+      arquero - copia_5: 221971171
+      arquero - copia_6: -671613522
+      arquero - copia_7: -826899955
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

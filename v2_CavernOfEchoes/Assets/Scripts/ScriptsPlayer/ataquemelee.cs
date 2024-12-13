@@ -17,6 +17,8 @@ public class PlayerAttack : MonoBehaviour
     // Opción de accesibilidad
     public bool autoTarget = false;
     private Animator animacion;
+    [SerializeField] public Transform controladorDisparo;
+    [SerializeField] public GameObject flecha;
     void Start(){
         animacion = GetComponent<Animator>();
     }
@@ -40,6 +42,15 @@ public class PlayerAttack : MonoBehaviour
             nextAttackTime = Time.time + attackCooldown;
         }
         }
+        else if(gameObject.CompareTag("Arquero")){
+            if(Time.time >= nextAttackTime && Input.GetKeyDown(attackKey))
+        {
+            animacion.SetBool("Ataque",true);
+             Disparar(); 
+             nextAttackTime = Time.time + attackCooldown;  
+        
+        }
+    }
     }
 
     void UpdateAttackPointByMouse()
@@ -107,6 +118,12 @@ public class PlayerAttack : MonoBehaviour
             }
         }
     }
+    
+
+    private void Disparar()
+    {
+        Instantiate(flecha, controladorDisparo.position, controladorDisparo.rotation);       
+    }
 
     // Visualizar el rango de ataque en el editor
     void OnDrawGizmosSelected()
@@ -125,3 +142,4 @@ public class PlayerAttack : MonoBehaviour
         }
     }
 }
+
