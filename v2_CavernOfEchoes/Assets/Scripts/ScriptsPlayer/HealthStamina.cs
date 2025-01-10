@@ -17,7 +17,7 @@ public class HealthStamina : MonoBehaviour
     private float attackCooldownTimer;
 
     // Cooldown de la habilidad especial
-    public float abilityCooldown = 10f;
+    public float abilityCooldown;
     private float abilityCooldownTimer;
     public Image abilityCooldownImage;
     public Text abilityCooldownText;
@@ -87,10 +87,19 @@ public class HealthStamina : MonoBehaviour
         {
             UseSpecialAbilityTank(); // Llama a la habilidad especial
             isAbilityOnCooldown = true;
+            abilityCooldown = 10f;
             abilityCooldownTimer = abilityCooldown;
             abilityCooldownImage.fillAmount = 1f;
             if (abilityCooldownText != null) abilityCooldownText.text = Mathf.Ceil(abilityCooldownTimer).ToString();
         }
+        else if (gameObject.CompareTag("Arquero")){
+            UseSpecialAbilityArcher();
+            isAbilityOnCooldown = true;
+            abilityCooldown = 3f;
+            abilityCooldownTimer = abilityCooldown;
+            abilityCooldownImage.fillAmount = 1f;
+            if (abilityCooldownText != null) abilityCooldownText.text = Mathf.Ceil(abilityCooldownTimer).ToString();
+        } 
         else
         {
             Debug.Log("Este personaje no puede usar la habilidad especial."); // Mensaje de error (opcional)
@@ -178,4 +187,41 @@ public class HealthStamina : MonoBehaviour
         player.actual.defensa -= defenseUPHability;
         player.habInUse = false;
     }
+void UseSpecialAbilityArcher()
+{
+
+// Obtener la posición del mouse en coordenadas de mundo
+    Vector3 mouseWorldPosition = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, Camera.main.transform.position.z));
+
+    // Ignorar la componente Z para trabajar con 2D
+    Vector2 attackOrigin = new Vector2(mouseWorldPosition.x, mouseWorldPosition.y);
+
+    // Radio del ataque (ajusta según lo que necesites)
+    float attackRadius = 1.5f;
+
+    // Detectar todos los objetos dentro del radio
+    Collider2D[] hits = Physics2D.OverlapCircleAll(attackOrigin, attackRadius);
+
+
+    Debug.DrawRay(attackOrigin, Vector2.up * attackRadius, Color.red, 1f);
+    Debug.DrawRay(attackOrigin, Vector2.right * attackRadius, Color.red, 1f);
+    Debug.DrawRay(attackOrigin, Vector2.down * attackRadius, Color.red, 1f);
+    Debug.DrawRay(attackOrigin, Vector2.left * attackRadius, Color.red, 1f);
+    // Procesar los objetos impactados
+    foreach (Collider2D hit in hits)
+    {
+        // Verificar si el collider tiene la etiqueta "Enemigo"
+        if (hit.CompareTag("Enemigo"))
+        {
+            Debug.Log("Enemigo impactado: " + hit.name);
+
+            // Realizar daño al enemigo
+            hit.GetComponent<Damageable>().TakeDamage(30);
+        }
+        else{
+            Debug.Log(hit.tag);
+        }
+    }
+}
+
 }

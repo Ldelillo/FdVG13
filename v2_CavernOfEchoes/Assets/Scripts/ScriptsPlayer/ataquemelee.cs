@@ -16,9 +16,15 @@ public class PlayerAttack : MonoBehaviour
 
     // Opción de accesibilidad
     public bool autoTarget = false;
-
+    private Animator animacion;
+    [SerializeField] public Transform controladorDisparo;
+    [SerializeField] public GameObject flecha;
+    void Start(){
+        animacion = GetComponent<Animator>();
+    }
     void Update()
     {
+        animacion.SetBool("Ataque",false);
         if (autoTarget)
         {
             UpdateAttackPointToNearestEnemy();
@@ -29,25 +35,38 @@ public class PlayerAttack : MonoBehaviour
         }
         if(!gameObject.CompareTag("Arquero")){
         if (Time.time >= nextAttackTime && Input.GetKeyDown(attackKey))
-        {
+        {   
+            animacion.SetBool("Ataque",true);
             attackSound.Play();
             PerformAttack();
             nextAttackTime = Time.time + attackCooldown;
         }
         }
+        else if(gameObject.CompareTag("Arquero")){
+            if(Time.time >= nextAttackTime && Input.GetKeyDown(attackKey))
+        {
+            animacion.SetBool("Ataque",true);
+             Disparar(); 
+             nextAttackTime = Time.time + attackCooldown;  
+        
+        }
+    }
     }
 
     void UpdateAttackPointByMouse()
     {
         // Obtén la posición del ratón en el mundo
-        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, Camera.main.nearClipPlane));
+        mousePosition.z = 0f; // Asegúrate de que esté en el plano 2D
 
-        // Calcula la dirección desde el jugador al ratón
-        Vector3 direction = (mousePosition - transform.position).normalized;
+        // Determina la dirección en el eje X según la posición del ratón respecto al jugador
+        float directionX = mousePosition.x >= transform.position.x ? 1f : -1f;
 
-        // Ajusta la posición de attackPoint en la dirección del ratón
-        attackPoint.position = transform.position + direction * attackRange;
+        // Ajusta la posición de attackPoint hacia la derecha o izquierda
+        attackPoint.position = transform.position + new Vector3(directionX * attackRange, 0f, 0f);
+
     }
+
 
     void UpdateAttackPointToNearestEnemy()
     {
@@ -99,6 +118,12 @@ public class PlayerAttack : MonoBehaviour
             }
         }
     }
+    
+
+    private void Disparar()
+    {
+        Instantiate(flecha, controladorDisparo.position, controladorDisparo.rotation);       
+    }
 
     // Visualizar el rango de ataque en el editor
     void OnDrawGizmosSelected()
@@ -117,3 +142,4 @@ public class PlayerAttack : MonoBehaviour
         }
     }
 }
+

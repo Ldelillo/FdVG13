@@ -17,7 +17,7 @@ public class HealthStamina : MonoBehaviour
     private float attackCooldownTimer;
 
     // Cooldown de la habilidad especial
-    public float abilityCooldown = 10f;
+    public float abilityCooldown; 
     private float abilityCooldownTimer;
     public Image abilityCooldownImage;
     public Text abilityCooldownText;
@@ -87,12 +87,22 @@ public class HealthStamina : MonoBehaviour
         {
             UseSpecialAbilityTank(); // Llama a la habilidad especial
             isAbilityOnCooldown = true;
+            abilityCooldown = 10f;
             abilityCooldownTimer = abilityCooldown;
             abilityCooldownImage.fillAmount = 1f;
             if (abilityCooldownText != null) abilityCooldownText.text = Mathf.Ceil(abilityCooldownTimer).ToString();
         }
+        else if (gameObject.CompareTag("Arquero")){
+            UseSpecialAbilityArcher();
+            isAbilityOnCooldown = true;
+            abilityCooldown = 3f;
+            abilityCooldownTimer = abilityCooldown;
+            abilityCooldownImage.fillAmount = 1f;
+            if (abilityCooldownText != null) abilityCooldownText.text = Mathf.Ceil(abilityCooldownTimer).ToString();
+        } 
         else
         {
+            Debug.Log("GameObject Tag" + gameObject.tag);
             Debug.Log("Este personaje no puede usar la habilidad especial."); // Mensaje de error (opcional)
         }
     }
@@ -178,4 +188,18 @@ public class HealthStamina : MonoBehaviour
         player.actual.defensa -= defenseUPHability;
         player.habInUse = false;
     }
+    void UseSpecialAbilityArcher(){
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit)){
+            if(hit.collider.CompareTag("Enemigo"))
+            {
+                Debug.Log("Enemigo impactado: " + hit.collider.name);
+
+                hit.collider.GetComponent<Damageable>().TakeDamage(30);
+        }
+        
+    }
+        }
+
 }
