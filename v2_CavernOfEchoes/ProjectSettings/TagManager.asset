@@ -9,6 +9,7 @@ TagManager:
   - Tanque
   - Rampa
   - Arquero
+  - Murcielago
   layers:
   - Default
   - TransparentFX
