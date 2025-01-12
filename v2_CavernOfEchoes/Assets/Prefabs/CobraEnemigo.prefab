@@ -133,8 +133,9 @@ MonoBehaviour:
   xDerechaMax: 5
   velocidad: 2
   distanciaDeteccion: 3
-  distanciaParada: 1
+  distanciaParada: 0
   jugador: {fileID: 0}
+  "da\xF1o": 0
 --- !u!61 &3370792600191764485
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -214,7 +215,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 100
+  experiencia: 0
   golpeado: {fileID: 3999956642879332010}
+  jugador: {fileID: 0}
 --- !u!82 &3999956642879332010
 AudioSource:
   m_ObjectHideFlags: 0

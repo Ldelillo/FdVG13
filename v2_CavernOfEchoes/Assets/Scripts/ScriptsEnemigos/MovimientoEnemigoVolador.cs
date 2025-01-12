@@ -104,7 +104,11 @@ public class MovimientoEnemigoVolador : MonoBehaviour
         {
             transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z); // Mirando a la izquierda
         }
-
+        float distanciaAlJugador = Vector2.Distance(transform.position, jugador.position);
+        if (distanciaAlJugador >= rangoDeteccion)
+        {
+            estadoActual = Estado.Patrullaje;
+        }
         // animacion.SetBool("Persigue", true);
     }
 
@@ -122,8 +126,6 @@ public class MovimientoEnemigoVolador : MonoBehaviour
                 Invoke("RestaurarColor", 0.5f); // Restaurar el color después de 0.5 segundos
             }
 
-            // Volver a patrullar
-            estadoActual = Estado.Patrullaje;
         }
     }
 
