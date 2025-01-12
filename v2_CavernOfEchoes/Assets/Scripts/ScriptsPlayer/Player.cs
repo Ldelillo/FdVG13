@@ -107,7 +107,7 @@ public class Player : MonoBehaviour
         vida -= actual.defensa >= ataqueE ? 1 : ataqueE - actual.defensa;
         if (vida <= 0)
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            (FindObjectOfType<SistemaPausa>()).GameOverFun();
         }
     }
     void updateStats(){

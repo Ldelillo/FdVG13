@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -29,8 +30,11 @@ public class HealthStamina : MonoBehaviour
     private int originalDefense; // Defensa original del jugador
     public int defenseUPHability = 500; // Aumento de defensa
 
+
+    public Boolean estamina;
     void Start()
     {
+        estamina = false;
         maxHealth = player.vida;
         currentStamina = maxStamina;
         attackCooldownTimer = 0f;
@@ -44,7 +48,6 @@ public class HealthStamina : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.P)) TakeDamage(20f);
 
         if (Input.GetKeyDown(KeyCode.Mouse0) && currentStamina >= maxStamina)
         {
@@ -109,9 +112,11 @@ public class HealthStamina : MonoBehaviour
 
     void TakeDamage(float amount)
     {
+        if(!estamina){
         player.vida -= player.actual.defensa >= amount ? 1 : (amount - player.actual.defensa);
         player.vida = Mathf.Clamp(player.vida, 0, maxHealth);
         UpdateHealthBar();
+        }
     }
 
     public void UseStamina(float amount)

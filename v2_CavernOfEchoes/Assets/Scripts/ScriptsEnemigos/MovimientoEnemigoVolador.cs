@@ -21,17 +21,12 @@ public class MovimientoEnemigoVolador : MonoBehaviour
     private SpriteRenderer spriteRenderer; // Referencia al SpriteRenderer
     private Color colorOriginal; // Para restaurar el color original
 
-    //private Animator animacion;
+    private Animator movimiento;
 
     void Start()
     {
-        // animacion = GetComponent<Animator>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
 
-        if (spriteRenderer != null)
-        {
-            colorOriginal = spriteRenderer.color; // Guardar el color original
-        }
+        movimiento = GetComponent<Animator>();
     }
 
     void Update()
@@ -39,11 +34,13 @@ public class MovimientoEnemigoVolador : MonoBehaviour
         switch (estadoActual)
         {
             case Estado.Patrullaje:
+                movimiento.SetBool("Persigue", false);
                 Patrullar();
                 DetectarJugador();
                 break;
 
             case Estado.Ataque:
+                movimiento.SetBool("Persigue", true);
                 PerseguirJugador();
                 break;
         }
