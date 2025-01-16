@@ -57,10 +57,10 @@ public class SistemaPausa : MonoBehaviour
     }
 
     public void GameOverFun(){
-        MenuPausa.SetActive(false); //Esto es inutil, ya que no deberias poder morir si estas en pausa pero bueno
+        MenuPausa.SetActive(false); 
         BotonPausa.SetActive(false); 
         GameOver.SetActive(true);
-        Time.timeScale = 0;
+        Time.timeScale = 0.01f;
     }
    
 }

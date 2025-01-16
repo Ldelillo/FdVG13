@@ -29,6 +29,7 @@ public class BotonesAccesibilidad : MonoBehaviour
     }
         public void Estamina(){
         (FindObjectOfType<HealthStamina>()).estamina = !(FindObjectOfType<HealthStamina>()).estamina;
+        (FindObjectOfType<Player>()).estamina = !(FindObjectOfType<Player>()).estamina;
         uncheckEsta.SetActive(estamina);
         estamina = !estamina;
         checkEsta.SetActive(estamina);

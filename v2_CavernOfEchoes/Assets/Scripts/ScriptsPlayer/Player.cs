@@ -23,6 +23,7 @@ public class Player : MonoBehaviour
     private bool puedeCambiarATanque = false;
 
     public int mirandoHacia;
+    public Boolean estamina;
 
     // Start is called before the first frame update
     void Start()
@@ -103,11 +104,13 @@ public class Player : MonoBehaviour
         transform.eulerAngles = new Vector3(0, transform.eulerAngles.y + 180,0);
     }
     public void recibirDaño(int ataqueE)
-    {
+    {   
+        if(!estamina){
         vida -= actual.defensa >= ataqueE ? 1 : ataqueE - actual.defensa;
         if (vida <= 0)
         {
             (FindObjectOfType<SistemaPausa>()).GameOverFun();
+        }
         }
     }
     void updateStats(){

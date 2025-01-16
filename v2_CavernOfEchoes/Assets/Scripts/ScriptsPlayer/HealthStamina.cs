@@ -112,7 +112,8 @@ public class HealthStamina : MonoBehaviour
 
     void TakeDamage(float amount)
     {
-        if(!estamina){
+        bool canTakeDamage = !estamina;
+        if(canTakeDamage){
         player.vida -= player.actual.defensa >= amount ? 1 : (amount - player.actual.defensa);
         player.vida = Mathf.Clamp(player.vida, 0, maxHealth);
         UpdateHealthBar();
